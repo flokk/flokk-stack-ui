@@ -25,7 +25,7 @@ module.exports = function(config) {
   var theme = require(config.theme);
 
   // Serve up the theme favicon
-  pack.useBefore("logger", express.favicon(theme.favicon));
+  pack.useBefore("logger", stack.middleware.favicon(theme.favicon));
 
   // Initialize the pipeline and expose it
   var pipeline = pack.assets = assets.init(config);
