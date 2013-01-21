@@ -1,0 +1,26 @@
+{
+  "name": "flokk-stack-ui",
+  "version": "0.0.0",
+  "description": "UI stack for a flokk applications",
+  "main": "index.js",
+  "scripts": {
+    "test": "NODE_ENV=test node_modules/.bin/mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/flokk/flokk-stack-ui.git"
+  },
+  "author": "Cameron Bytheway <cameron@nujii.com>",
+  "license": "MIT",
+  "readmeFilename": "README.md",
+  "dependencies": {
+    "simple-stack-common": "https://github.com/flokk/simple-stack-common/archive/master.tar.gz",
+    "angular-router": "0.0.0"
+  },
+  "devDependencies": {
+    "theme-retro": "https://github.com/flokk/theme-retro/archive/master.tar.gz",
+    "mocha": "~1.8.1",
+    "should": "~1.2.1",
+    "supertest": "~0.5.1"
+  }
+}
