@@ -6,6 +6,7 @@ var stack = require("simple-stack-common")
   , router = require("angular-router")
   , join = require("path").join
   , notFound = require("./lib/notFound")
+  , errorHandler = require("./lib/errorHandler")
   , assets = require("simple-assets");
 
 // Add this for theme lookup
