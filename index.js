@@ -29,7 +29,18 @@ module.exports = function(config) {
   pack.useBefore("logger", stack.middleware.favicon(theme.favicon));
 
   // Initialize the pipeline and expose it
-  var pipeline = pack.assets = assets.init(config);
+  var pipeline = pack.assets = assets.init(config, pack);
+
+  if (config.server) {
+    ["js", "css", "img", "partials"].forEach(function(dir) {
+      pipeline.prependPath(join(process.cwd(), "public", dir));
+    });
+  }
+  else {
+    ["js", "css", "img"].forEach(function(dir) {
+      pipeline.prependPath(join(process.cwd(), "app", dir));
+    });
+  }
 
   // Let the theme add some paths
   theme.assets(pipeline);
@@ -37,10 +48,22 @@ module.exports = function(config) {
   // Mount the assets
   pack.use("/assets", assets.middleware(pipeline));
 
-  // Expose the index
-  pack.use(router({
-    index: assets.layout(pipeline)
-  }));
+  // Locals
+  pack.locals.APP_NAME = config.appName || require(join(process.cwd(), "package.json")).name
+
+  // Router
+  if (config.server) {
+    pack.use(pack.router);
+  }
+  else {
+    pack.use(router({
+      index: function(req, res) {
+        res.render(theme.layout, {
+          ANGULAR: true
+        });
+      }
+    }));
+  }
 
   pack.use(notFound());
 
