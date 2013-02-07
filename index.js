@@ -6,8 +6,7 @@ var stack = require("simple-stack-common")
   , router = require("angular-router")
   , join = require("path").join
   , notFound = require("./lib/notFound")
-  , errorHandler = require("./lib/errorHandler")
-  , assets = require("simple-assets");
+  , errorHandler = require("./lib/errorHandler");
 
 // Add this for theme lookup
 module.paths.push(join(process.cwd(), "node_modules"));
@@ -28,26 +27,6 @@ module.exports = function(config) {
   // Serve up the theme favicon
   pack.useBefore("logger", stack.middleware.favicon(theme.favicon));
 
-  // Initialize the pipeline and expose it
-  var pipeline = pack.assets = assets.init(config, pack);
-
-  if (config.server) {
-    ["js", "css", "img", "partials"].forEach(function(dir) {
-      pipeline.prependPath(join(process.cwd(), "public", dir));
-    });
-  }
-  else {
-    ["js", "css", "img"].forEach(function(dir) {
-      pipeline.prependPath(join(process.cwd(), "app", dir));
-    });
-  }
-
-  // Let the theme add some paths
-  theme.assets(pipeline);
-
-  // Mount the assets
-  pack.use("/assets", assets.middleware(pipeline));
-
   // Locals
   pack.locals.APP_NAME = config.appName || require(join(process.cwd(), "package.json")).name
 
@@ -58,6 +37,7 @@ module.exports = function(config) {
   else {
     pack.use(router({
       index: function(req, res) {
+        // TODO
         res.render(theme.layout, {
           ANGULAR: true
         });
