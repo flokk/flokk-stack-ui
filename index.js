@@ -27,6 +27,9 @@ module.exports = function(config) {
   // Serve up the theme favicon
   pack.useBefore("logger", stack.middleware.favicon(theme.favicon));
 
+  // Serve our built assets
+  pack.useAfter("logger", stack.middleware.static(join(process.cwd(), "build")));
+
   // Locals
   pack.locals.APP_NAME = config.appName || require(join(process.cwd(), "package.json")).name
 
