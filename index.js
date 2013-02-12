@@ -20,6 +20,16 @@ module.exports = function(config) {
   // Create a pack
   var pack = stack(config);
 
+  // Require our theme
+  config.theme = config.theme || "theme-retro";
+  var theme = require(config.theme);
+
+  // Serve up the theme favicon
+  pack.useBefore("logger", stack.middleware.favicon(theme.favicon));
+
+  // Serve our built assets
+  pack.useAfter("logger", stack.middleware.static(join(process.cwd(), "build")));
+
   // Locals
   pack.locals.APP_NAME = config.appName || require(join(process.cwd(), "package.json")).name
 
@@ -35,6 +45,7 @@ module.exports = function(config) {
   else {
     pack.use(router({
       index: function(req, res) {
+        // TODO
         res.render(theme.layout, {
           ANGULAR: true
         });

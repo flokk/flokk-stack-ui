@@ -14,11 +14,10 @@
   "license": "MIT",
   "readmeFilename": "README.md",
   "dependencies": {
-    "simple-stack-common": "https://github.com/flokk/simple-stack-common/archive/master.tar.gz",
+    "simple-stack-common": "git+https://github.com/flokk/simple-stack-common.git",
     "angular-router": "~0.0.0"
   },
   "devDependencies": {
-    "theme-retro": "https://github.com/flokk/theme-retro/archive/master.tar.gz",
     "mocha": "~1.8.1",
     "should": "~1.2.1",
     "supertest": "~0.5.1"
