@@ -15,7 +15,6 @@
   "readmeFilename": "README.md",
   "dependencies": {
     "simple-stack-common": "https://github.com/flokk/simple-stack-common/archive/master.tar.gz",
-    "simple-assets": "https://github.com/flokk/simple-assets/archive/master.tar.gz",
     "angular-router": "~0.0.0"
   },
   "devDependencies": {
