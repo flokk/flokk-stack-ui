@@ -21,7 +21,7 @@ module.exports = function(config) {
   var pack = stack(config);
 
   // Require our theme
-  config.theme = config.theme || "theme-retro";
+  config.theme = config.theme || "theme-origami";
   var theme = require(config.theme);
 
   // Serve up the theme favicon
