@@ -30,6 +30,9 @@ module.exports = function(config) {
   // Serve our built assets
   pack.useAfter("logger", stack.middleware.static(join(process.cwd(), "build")));
 
+  // Parse cookies
+  pack.useAfter("static", stack.middleware.cookieParser());
+
   // Locals
   pack.locals.APP_NAME = config.appName || require(join(process.cwd(), "package.json")).name
 
