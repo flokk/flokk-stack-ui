@@ -36,17 +36,14 @@ module.exports = function(config) {
   // Locals
   pack.locals.APP_NAME = config.appName || require(join(process.cwd(), "package.json")).name
 
-  pack.use(function localBase(req, res, next) {
+  pack.useBefore("router", function localBase(req, res, next) {
     res.locals.base = req.base;
     next();
   });
 
   // Router
-  if (config.server) {
-    pack.use(pack.router);
-  }
-  else {
-    pack.use(router({
+  if (!config.server) {
+    pack.replace("router", router({
       index: function(req, res) {
         // TODO
         res.render(theme.layout, {
