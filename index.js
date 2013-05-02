@@ -25,10 +25,10 @@ module.exports = function(config) {
   var theme = require(config.theme);
 
   // Serve up the theme favicon
-  pack.useBefore("logger", stack.middleware.favicon(theme.favicon));
+  pack.useBefore("emptyFavicon", stack.middleware.favicon(theme.favicon));
 
   // Serve our built assets
-  pack.useAfter("logger", stack.middleware.static(join(process.cwd(), "build")));
+  pack.useAfter("emptyFavicon", stack.middleware.static(join(process.cwd(), "build")));
 
   // Parse cookies
   pack.useAfter("static", stack.middleware.cookieParser());
